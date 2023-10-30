@@ -4,15 +4,15 @@ import { Model } from 'mongoose';
 import { User } from './users.model';
 import { ClientProxy } from '@nestjs/microservices';
 import { createHash } from 'crypto';
-import fetch from 'cross-fetch';
 import axios from 'axios';
+import nodemailer from 'nodemailer';
 import * as fs from 'fs';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel('User') private readonly userModel: Model<User>,
-    // @Inject('payever') private client: ClientProxy,
+    @Inject('payever') private client: ClientProxy,
   ) { }
 
   async create(user: User) {
@@ -23,7 +23,8 @@ export class UsersService {
       throw new BadRequestException(`Same email ${email} already exists`);
     }
     const newUser = await new this.userModel(user).save();
-    // this.client.connect();
+    
+    this.client.emit('signup', newUser);
     return newUser;
   }
 
