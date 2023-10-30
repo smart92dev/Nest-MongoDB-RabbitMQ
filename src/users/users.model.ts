@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 
 export const UserSchema = new mongoose.Schema({
+  id: {type: String, required: true},
   email: { type: String, required: true },
   first_name: { type: String, required: true },
   last_name: { type: String, required: false },
@@ -10,6 +11,7 @@ export const UserSchema = new mongoose.Schema({
 });
 
 export interface User {
+  id: string,
   email: string;
   first_name: string;
   last_name: string;

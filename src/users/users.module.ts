@@ -13,19 +13,19 @@ import { UserSchema } from './users.model';
         schema: UserSchema,
       },
     ]),
-    ClientsModule.register([
-      {
-        name: 'payever',
-        transport: Transport.RMQ,
-        options: {
-          urls: ['amqp://localhost:5672'],
-          queue: 'payever',
-          queueOptions: {
-            durable: true,
-          },
-        },
-      },
-    ]),
+    // ClientsModule.register([
+    //   {
+    //     name: 'payever',
+    //     transport: Transport.RMQ,
+    //     options: {
+    //       urls: ['amqp://guest:guest@rabbitmq:5672'],
+    //       queue: 'payever',
+    //       queueOptions: {
+    //         durable: true,
+    //       },
+    //     },
+    //   },
+    // ]),
   ],
   providers: [UsersService],
   controllers: [UsersController],

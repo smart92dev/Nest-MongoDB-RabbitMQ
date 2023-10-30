@@ -9,7 +9,7 @@ import {
 import { User } from './users.model';
 import { UsersService } from './users.service';
 
-@Controller('/users')
+@Controller('api/users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
@@ -23,19 +23,19 @@ export class UsersController {
     return this.usersService.create(user);
   }
 
-  @Get('user/:id')
-  getById(@Param() params) {
-    return this.usersService.findById(params.id);
+  @Get(':userId')
+  getById(@Param('userId') userId: string) {
+    return this.usersService.findByUserId(userId);
   }
 
-  @Get('user/:id/avatar')
-  async getAvatar(@Param('id') id: string) {
-    const avatar = await this.usersService.getAvatar(id);
+  @Get(':userId/avatar')
+  async getAvatar(@Param('userId') userId: string) {
+    const avatar = await this.usersService.getAvatar(userId);
     return { avatar };
   }
 
-  @Delete('user/:id')
-  deleteUser(@Param() params): Promise<boolean> {
-    return this.usersService.removeUser(params.id);
+  @Delete(':userId')
+  deleteUser(@Param('userId') userId: string): Promise<boolean> {
+    return this.usersService.removeUser(userId);
   }
 }
