@@ -7,6 +7,8 @@ import { UsersModule } from './users/users.module';
     MongooseModule.forRoot('mongodb://127.0.0.1:27017/payever'),
     UsersModule,
   ],
-  providers: [UsersModule],
+  providers: [
+    UsersModule,
+  ],
 })
 export class AppModule {}
