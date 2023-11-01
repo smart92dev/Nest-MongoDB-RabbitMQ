@@ -1,20 +1,20 @@
-import { Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, BadRequestException, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './users.model';
 import { ClientProxy } from '@nestjs/microservices';
 import { createHash } from 'crypto';
 import axios from 'axios';
-import nodemailer from 'nodemailer';
 import * as fs from 'fs';
 
 @Injectable()
-export class UsersService {
+export class UsersService implements OnModuleInit {
   constructor(
     @InjectModel('User') private readonly userModel: Model<User>,
     @Inject('payever') private client: ClientProxy,
   ) { }
 
+  // @EventPattern('payever')
   async create(user: User) {
     const { email } = user;
     // check user
@@ -23,8 +23,8 @@ export class UsersService {
       throw new BadRequestException(`Same email ${email} already exists`);
     }
     const newUser = await new this.userModel(user).save();
-    
-    this.client.emit('signup', newUser);
+
+    this.client.emit('payever', newUser);
     return newUser;
   }
 
@@ -76,4 +76,8 @@ export class UsersService {
       return false;
     }
   }
+
+  async onModuleInit() {
+    await this.client.connect();
+  };
 }
