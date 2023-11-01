@@ -25,7 +25,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Example body to use api 
+## Features 
 
 ```
 - add user
