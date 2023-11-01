@@ -9,7 +9,6 @@ import {
 import { User } from './users.model';
 import { UsersService } from './users.service';
 import { EventPattern, MessagePattern } from '@nestjs/microservices';
-import { Model } from 'mongoose';
 import * as nodemailer from 'nodemailer';
 @Controller('api/users')
 export class UsersController {
@@ -24,7 +23,7 @@ export class UsersController {
 
   @EventPattern('payever')
   // @MessagePattern('payever')  is also working
-  async hello(data: Model<User>): Promise<void> {
+  async hello(data: User): Promise<void> {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
@@ -37,7 +36,7 @@ export class UsersController {
     console.log(data);
     const mailOptions = {
       from: 'data.email@gmail.com',
-      to: 'emeralddev92@gmail.com',
+      to: data.email,
       subject: 'Hello',
       text: 'This is the body of the email'
     }

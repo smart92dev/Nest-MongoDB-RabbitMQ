@@ -28,12 +28,9 @@ $ npm run start:prod
 ## Example body to use api 
 
 ```
-{
-	"email": "willy.silva@hotmail.com",
-	"first_name": "willy",
-	"last_name": "silva",
-	"avatar": "https://reqres.in/img/faces/7-image.jpg"
-}
+- add user
+- send message to rabbitMQ
+- receive message from rabbitMQ and send email
 
 ```
  
