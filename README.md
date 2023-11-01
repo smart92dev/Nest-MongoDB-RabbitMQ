@@ -2,9 +2,9 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 ## Requirements
 
-Node.js
-RabbitMQ
-MongoDB 
+- Node.js
+- RabbitMQ
+- MongoDB 
 
 ## Installation
 
